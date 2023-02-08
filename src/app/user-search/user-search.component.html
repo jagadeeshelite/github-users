@@ -1,0 +1,61 @@
+<!-- check {{users | json}} -->
+<div class="container">
+  <div class="">
+    <form class="d-flex justify-content-center" role="search">
+      <fieldset>
+        <legend>Search Github user</legend>
+        <div class="mb-3">
+          <input
+            class="form-control me-2"
+            type="text"
+            name="search"
+            [(ngModel)]="searchTerm"
+            placeholder="Search"
+            aria-label="Search"
+            class="form-control"
+          />
+        </div>
+
+        <button
+          class="btn btn-outline-success"
+          type="submit"
+          (click)="searchGithubUsers()"
+        >
+          Search
+        </button>
+      </fieldset>
+    </form>
+  </div>
+
+  <article style="display: grid" *ngIf="checkUser()">
+    <h5>Search result</h5>
+    <div *ngIf="users">
+      <div class="container text-center">
+        <div class="row p-2" *ngFor="let user of users">
+          <div class="col-6">
+            <img
+              style="height: 80px"
+              src="{{ user.avatar_url }}"
+              alt="avatar"
+            />
+          </div>
+          <div class="col-6">{{ user.login }}</div>
+        </div>
+        <div></div>
+        <!-- <a routerLink="/user/{{ user.login }}">{{ user.login }} </a> -->
+      </div>
+    </div>
+  </article>
+  <article style="display: grid" *ngIf="!checkUser() && isSubmitted">
+    <h5>Search result</h5>
+    <div>
+      <div class="container text-center">
+        <div class="row p-2">
+          <span>No results found</span>
+        </div>
+        <div></div>
+        <!-- <a routerLink="/user/{{ user.login }}">{{ user.login }} </a> -->
+      </div>
+    </div>
+  </article>
+</div>

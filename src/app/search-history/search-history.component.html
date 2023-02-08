@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <article style="display: grid">
+    <h5>Search History</h5>
+    <div>
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-6 p-2">Search Term</div>
+          <div class="col-6 p-2">Search History</div>
+        </div>
+        <div class="row" *ngFor="let user of searchHistory">
+          <div class="col-6 p-2">
+            {{ user.searchTerm }}
+          </div>
+          <div class="col-6 p-2">
+            <div class="col-6" *ngIf="user.result[0]">
+              <img
+                style="height: 80px"
+                src="{{ user.result[0].avatar_url }}"
+                alt="avatar"
+              />
+            </div>
+            <div class="col-6" *ngIf="!user.result[0]">no result found</div>
+            <div class="col-6">{{ user.result[0].login }}</div>
+          </div>
+        </div>
+
+        <div></div>
+      </div>
+    </div>
+  </article>
+
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <button
+        class="btn btn-outline-success"
+        type="submit"
+        (click)="clearHistory()"
+      >
+        Clear search history
+      </button>
+    </div>
+  </div>
+</div>
